@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Header from "../../components/0.1_header";
-
-const Request = () => {
+import {request} from "../../redux/action/studentT"
+import { connect } from "react-redux";
+const Request = ({request}) => {
   const req = ["New SID", "Review Grade", "Final Transcript", "Freez Semester"];
 
   const [data, setData] = useState({ reqtype: "", desc: "" });
@@ -13,7 +14,10 @@ const Request = () => {
   const submit = (e) => {
     e.preventDefault();
     console.log("this is data", data);
+    request(data)
   };
+
+
 
   return (
     <>
@@ -53,4 +57,6 @@ const Request = () => {
   );
 };
 
-export default Request;
+
+export default connect(null,{request}) (Request);
+

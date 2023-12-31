@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Header from "../../components/0.1_header";
 import logo from "../../assets/logo1.png";
+import {transcript} from "../../redux/action/studentT"
+import { connect } from "react-redux";
+const Transcript = ({transcript,transcriptInfo}) => {
+  // const grades = [
+  //   { name: "OOP", grade: "+A", points: "3.9" },
+  //   { name: "Data Structure", grade: "B+", points: "3.9" },
+  //   { name: "C++", grade: "C+", points: "3.9" },
+  // ];
 
-const Transcript = () => {
-  const grades = [
-    { name: "OOP", grade: "+A", points: "3.9" },
-    { name: "Data Structure", grade: "B+", points: "3.9" },
-    { name: "C++", grade: "C+", points: "3.9" },
-  ];
+
+  useEffect(()=>{
+    transcript();
+  },[transcript])
 
   return (
     <>
@@ -28,13 +34,13 @@ const Transcript = () => {
                   <th className="w-full">Grades</th>
                 </tr>
 
-                {grades.map((item, index) => (
+                {transcriptInfo? transcriptInfo.map((item, index) => (
                   <tr key={index} className="flex flex-row gap-10">
                     <td className="w-full"> {item.name}</td>
                     <td className="w-full">{item.points}</td>
                     <td className="w-full">{item.grade}</td>
                   </tr>
-                ))}
+                )):<>no data</>}
               </tbody>
             </table>
 
@@ -52,4 +58,10 @@ const Transcript = () => {
     </>
   );
 };
-export default Transcript;
+const mstp=(state)=>{
+  return{
+    transcriptInfo:state.StudentR.transcriptInfo,
+  }
+}
+export default connect(mstp,{transcript}) (Transcript);
+

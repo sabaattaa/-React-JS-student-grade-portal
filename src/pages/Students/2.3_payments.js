@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/0.1_header";
-
-const Payments = () => {
+import {payment} from "../../redux/action/studentT"
+import { connect } from "react-redux";
+const Payments = ({payment,paymentsInfo}) => {
   const payments = [
     {
       titale: "tueetion fee",
@@ -20,6 +21,11 @@ const Payments = () => {
     },
   ];
 
+
+  useEffect(()=>{
+    payment();
+  },[payment])
+
   return (
     <div className="flex flex-col justify-center items-center">
       <Header />
@@ -37,13 +43,13 @@ const Payments = () => {
                 <th className="w-full">Date</th>
               </tr>
 
-              {payments.map((item, index) => (
+              {paymentsInfo?paymentsInfo.map((item, index) => (
                 <tr key={index} className="flex flex-row gap-10">
                   <td className="w-full"> {item.titale}</td>
                   <td className="w-full">{item.amount}</td>
                   <td className="w-full">{item.date}</td>
                 </tr>
-              ))}
+              )):<>no data</>}
             </tbody>
           </table>
         </div>
@@ -52,4 +58,10 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+const mstp=(state)=>{
+  return{
+    paymentsInfo:state.StudentR.paymentsInfo,
+  }
+}
+export default connect(mstp,{payment}) (Payments);
+

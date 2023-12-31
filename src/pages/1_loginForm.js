@@ -22,7 +22,10 @@ useEffect(()=>{
   }
   else if(role==='STUDENT'){
     navigate("/home")
-  }else{
+  }else if(role==="MANAGEMENT"){
+    navigate("/viewRequests")
+  }
+  else{
     navigate("/")
   }
 },[role])

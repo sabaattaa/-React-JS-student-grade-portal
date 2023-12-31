@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Header from "../../components/0.1_header";
-
-const Complaint = () => {
+import {complaints} from "../../redux/action/studentT"
+import { connect } from "react-redux";
+const Complaint = ({complaints}) => {
   const [data, setData] = useState({ desc: "" });
 
   const change = (e) => {
@@ -10,7 +11,7 @@ const Complaint = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log("this is data", data);
+    complaints(data)
   };
 
   return (
@@ -44,4 +45,6 @@ const Complaint = () => {
   );
 };
 
-export default Complaint;
+
+export default connect(null,{complaints}) (Complaint);
+

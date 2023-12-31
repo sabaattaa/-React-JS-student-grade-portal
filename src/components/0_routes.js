@@ -6,6 +6,7 @@ import Request from "../pages/Students/2.4_request";
 import Complaint from "../pages/Students/2.5_complaint";
 import Admin from "../pages/Admin/1_admin"
 import Teacher from "../pages/Teacher/1_teacher"
+import ViewRequests from "../pages/Management/viewRequests"
 const routes = [
   {
     path: "/",
@@ -39,6 +40,10 @@ const routes = [
     path: "/teacher",
     component: <Teacher />,
   },
+  {
+    path:"/viewRequests",
+    component:<ViewRequests />
+  }
 ];
 
 export default routes;
